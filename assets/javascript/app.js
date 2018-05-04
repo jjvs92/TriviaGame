@@ -1,109 +1,132 @@
 $(document).ready(function(){
 
-    var timeLeft= 90;
+    $(".questionaire").hide();
+    $("#submitButton").hide();
 
-    $("#timer").text("Time remaining: " + secondsMinute(timeLeft));
+    var timeLeft= 60;
 
     function countDown(){
         timeLeft --;
         $("#timer").text("Time remaining: " + secondsMinute(timeLeft));
+        
     }
     function secondsMinute(s){
         var min= Math.floor (s / 60);
         var sec = s % 60;
+        if(sec < 10){
+            sec = "0" + sec;
+        }
+        if(min < 10){
+            min = "0" + min;
+        }
         return min + ":" + sec;
-    }
- setInterval(countDown, 1000);
- 
-var questions= [
-    questionOne = {
-                question: "How old am I?",
-                answerOne: "34",
-                answerTwo: "25",
-                answerThree: "20",
-                answerFour: "28",
-                id: "qOne",
-                answer: "25",
-},
+    } 
 
-    questionTwo = {
-                question: "Where was I born?",
-                answerOne: "San Antonio",
-                answerTwo: "Del Rio",
-                answerThree: "Eagle Pass",
-                answerFour: "Sacramento",
-                id: "qTwo",
-                answer: "Eagle Pass",
-},
-    questionThree = {
-                question: "Practice question",
-                answerOne: "Me",
-                answerTwo: "Myself",
-                answerThree: "and I",
-                answerFour: "Julian",
-                id: "qThree",
-                answer: "Julian",
-},
-    questionFour = {
-                question: "Will I pass this class?",
-                answerOne: "Yes",
-                answerTwo: "Maybe",
-                answerThree: "Good Luck",
-                answerFour: "Keep trying!",
-                id: "qFour",
-                answer: "Yes",
-    }
-]
+    $("body").on("click", "#startButton", function(){
+        $("#timer").text("Time remaining: " + secondsMinute(timeLeft));        
+        setInterval (countDown, 1000);;
+        $(".questionaire").show();
+        $("#startButton").hide();
+        $("#submitButton").show();
+        $(".correctAnswers").hide();
+        $(".wrongAnswers").hide();
+        numberCorrect= 0;
+        numberWrong= 0;
 
-questionsFunction();
-
-// Creating forloop to put questions and answers on the webpage
-function questionsFunction(){
-    for( var i=0; i<questions.length; i++){
-
-        $(".questionaire").append(questions[i].question + "<br>");
-        $(".questionaire").append(`<input type= "radio" name=${questions[i].id} data-name=${questions[i].answerOne} id= "a${questions[i].id}" class="buttons"> ${questions[i].answerOne}`)
-        $(".questionaire").append(`<input type= "radio" name=${questions[i].id} data-name=${questions[i].answerTwo} id= "b${questions[i].id}" class="buttons"> ${questions[i].answerTwo}`)
-        $(".questionaire").append(`<input type= "radio" name=${questions[i].id} data-name=${questions[i].answerThree} id= "c${questions[i].id}" class="buttons"> ${questions[i].answerThree}`)
-        $(".questionaire").append(`<input type= "radio" name=${questions[i].id} data-name=${questions[i].answerFour} id= "d${questions[i].id}" class="buttons"> ${questions[i].answerFour} <br><br>`)
-
-    }
-
-}
-var correctAnswers = 0;
-var incorrectAnswers= 0;
-
-    function myFunction(checkingAnswers){
-    for(var j=0; j < questions.length; j++){
-        var a = $(checkingAnswers).attr("data-name");
-        
-        console.log(a);
+    })
    
-    if ($(checkingAnswers).attr("data-name") === questions[j].answer){
-        correctAnswers += 1;
-        console.log(correctAnswers);} 
-    else{
-        console.log("testing");
-
-}
-}
-}
-
-
-
     
-$("body").on("click", "#submitButton", function(){
+    var numberCorrect = 0;
+    var numberWrong = 0;
 
-    myFunction(".buttons");
+    var questions= [
+        {
+            question: "How old am I?",
+            answerOne: "34",
+            answerTwo: "25",
+            answerThree: "20",
+            answerFour: "28",
+            id: "0",
+            correctAnswer: "25",
+    },
 
-    timeLeft= 0;
-    //clearInterval(countDown());
-    console.log("working");
-    
-    }
-)
+        {
+            question: "Where was I born?",
+            answerOne: "San Antonio",
+            answerTwo: "Del Rio",
+            answerThree: "Eagle Pass",
+            answerFour: "Sacramento",
+            id: "1",
+            correctAnswer: "Eagle",
+    },
+        {
+            question: "Practice question",
+            answerOne: "Me",
+            answerTwo: "Myself",
+            answerThree: "and I",
+            answerFour: "Julian",
+            id: "2",
+            correctAnswer: "Julian",
+    },
+        {
+            question: "Will I pass this class?",
+            answerOne: "Yes",
+            answerTwo: "Maybe",
+            answerThree: "Good Luck",
+            answerFour: "Keep trying!",
+            id: "3",
+            correctAnswer: "Yes",
+    },
+        {
+            question: "Test 2",
+            answerOne: "Yes",
+            answerTwo: "Maybe",
+            answerThree: "Good Luck",
+            answerFour: "Keep trying!",
+            id: "4",
+            correctAnswer: "Yes",                
+        }
+    ]
 
+    // Creating forloop to put questions and answers on the webpage
+    function questionsFunction(){
+        for( var i=0; i<questions.length; i++){
 
+            $(".questionaire").append(questions[i].question + "<br>");
+            $(".questionaire").append(`<input type= "radio" name=${questions[i].id} value=${questions[i].answerOne} id= "a${questions[i].id}" class="buttons"> ${questions[i].answerOne}`)
+            $(".questionaire").append(`<input type= "radio" name=${questions[i].id} value=${questions[i].answerTwo} id= "b${questions[i].id}" class="buttons"> ${questions[i].answerTwo}`)
+            $(".questionaire").append(`<input type= "radio" name=${questions[i].id} value=${questions[i].answerThree} id= "c${questions[i].id}" class="buttons"> ${questions[i].answerThree}`)
+            $(".questionaire").append(`<input type= "radio" name=${questions[i].id} value=${questions[i].answerFour} id= "d${questions[i].id}" class="buttons"> ${questions[i].answerFour} <br><br>`)
 
+        }
+    }    
+    questionsFunction();
+
+    $("body").on("click", "#submitButton", function(){
+
+        for(var i=0; i< questions.length; i++){
+            var value = $(`input[name=${i}]:checked`).val(); 
+
+            console.log(value);
+            if(questions[i].correctAnswer===value){
+                numberCorrect++
+            }else{
+                numberWrong++
+            }
+
+        }
+        console.log(numberCorrect);
+        console.log(numberWrong);
+        $(".questionaire").hide();
+        $(".correctAnswers").text("Correct answers: " + numberCorrect);
+        $(".wrongAnswers").text("Incorrect answers: " + numberWrong);
+        $("#submitButton").hide();
+        $("#startButton").show();
+        $(".correctAnswers").show();
+        $(".wrongAnswers").show();        
+        timeLeft = 90;
+        window.clearInterval(interValid);
+
+    })
 
 })
