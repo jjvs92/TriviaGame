@@ -11,24 +11,32 @@
     <link rel="stylesheet" type= "text/css" href= "assets/css/style.css">
 </head>
 <body>
-
     <header>
-        <h1 id="test">Total Trivia game</h1>
-        <br>
-        <p id="timer"></p>
+        <h1 id="title">TOTAL TRIVIA GAME</h1>
+        <br>        
     </header>
 
-    <button type="button" id="startButton">Start</button>
-    <button type="button" id="restartButton">Play again</button>
+    <div class="container manipulateContainer">
+        <div class="row textModifier">
+            <div class="col-md-12">
+                <div id="instructions">How well do you know your Friends? Press the start button to begin. You will have a minute and a half to answer 15 questions. Have fun!</div>
+
+                <button type="button" id="startButton">Start</button>
+                <p id="timer"></p>
     
-    <form class="questionaire"></form>
+                <form class="questionaire"></form>
+                <div id="thanks">Thanks for playing!</div>
+                <div class="correctAnswers"></div>
+                <div class="wrongAnswers"></div>
+                <button type="button" id="restartButton">Play again</button>
+                <br>
+                <image src= "assets/images/groupOfFriends.jpg" id="friendsCast" alt= "Friends Cast"></image>
 
-    <div class="correctAnswers"></div>
-    <div class="wrongAnswers"></div>
-    <div class="unAnswered"></div>
+                <button type="button" id="submitButton">Submit</button>
 
-    <button type="button" id="submitButton">Submit</button>
-
+            </div>
+        </div>
+    </div>
 <script rel= "javascript/text" src= "assets/javascript/app.js"></script>
 </body>
 </html>

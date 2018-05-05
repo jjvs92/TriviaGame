@@ -1,3 +1,53 @@
+body{
+    background-image: url(../images/centralPerk1.png);    
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
 .buttons{
     margin-left: 15px;
+}
+
+#title{
+    position: relative;
+    top: 140px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    color: #ff3333;
+    font-family: 'Oswald', sans-serif;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;    
+}
+
+#startButton{
+    position: center;
+    margin-top: 40px;
+
+}
+
+.manipulateContainer{
+    position: relative;
+    top: 160px;
+    font-family: verdana;
+    padding: 0px;
+}
+
+#restartButton{
+    text-align: center;
+}
+
+#submitButton{
+    margin-bottom: 30px;
+    position: center;
+}
+
+.textModifier{
+    text-align: center;
+    font-size: 25px;
+    line-height: 32px;
+}
+
+#friendsCast{
+    margin-top: 50px;
+    width: 550px;
 }
