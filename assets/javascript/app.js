@@ -2,12 +2,42 @@ $(document).ready(function(){
 
     $(".questionaire").hide();
     $("#submitButton").hide();
+    $("#restartButton").hide();
 
-    var timeLeft= 60;
+    var timeLeft= 10;
+    var interValid;
 
     function countDown(){
         timeLeft --;
         $("#timer").text("Time remaining: " + secondsMinute(timeLeft));
+
+        if(timeLeft===0){
+            clearInterval(interValid);
+
+            for(var i=0; i< questions.length; i++){
+                var value = $(`input[name=${i}]:checked`).val(); 
+    
+                console.log(value);
+                if(questions[i].correctAnswer===value){
+                    numberCorrect++
+                }else{
+                    numberWrong++
+                }
+    
+            }
+            console.log(numberCorrect);
+            console.log(numberWrong);
+            $("#timer").hide();
+            $(".questionaire").hide();
+            $(".correctAnswers").text("Correct answers: " + numberCorrect);
+            $(".wrongAnswers").text("Incorrect answers: " + numberWrong);
+            $("#submitButton").hide();
+            $("#startButton").show();
+            $(".correctAnswers").show();
+            $(".wrongAnswers").show();        
+            timeLeft = 90;
+            window.clearInterval(interValid);            
+           }
         
     }
     function secondsMinute(s){
@@ -23,15 +53,18 @@ $(document).ready(function(){
     } 
 
     $("body").on("click", "#startButton", function(){
+        clearInterval(interValid);
         $("#timer").text("Time remaining: " + secondsMinute(timeLeft));        
-        setInterval (countDown, 1000);;
+        interValid = setInterval (countDown, 1000);;
         $(".questionaire").show();
         $("#startButton").hide();
         $("#submitButton").show();
         $(".correctAnswers").hide();
         $(".wrongAnswers").hide();
+        $("#timer").show();
         numberCorrect= 0;
         numberWrong= 0;
+
 
     })
    
@@ -117,16 +150,19 @@ $(document).ready(function(){
         }
         console.log(numberCorrect);
         console.log(numberWrong);
+        $("#timer").hide();
         $(".questionaire").hide();
         $(".correctAnswers").text("Correct answers: " + numberCorrect);
         $(".wrongAnswers").text("Incorrect answers: " + numberWrong);
         $("#submitButton").hide();
-        $("#startButton").show();
+        $("#restartButton").show();
         $(".correctAnswers").show();
         $(".wrongAnswers").show();        
         timeLeft = 90;
         window.clearInterval(interValid);
-
     })
 
+    $("body").on("click", "#restartButton", function(){
+        location.reload();
+    })
 })
