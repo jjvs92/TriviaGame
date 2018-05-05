@@ -261,4 +261,5 @@ $(document).ready(function(){
     $("body").on("click", "#restartButton", function(){
         location.reload();
     })
+
 })
